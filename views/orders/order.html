@@ -11,48 +11,39 @@
                     <div class="invoice p-3 mb-3">
                         <div class="row mb-4">
                             <div class="col-12">
-                                <h4><span>Status:  <strong
-                                        {{if eq .Object.Order.Status "Cancelado"}}class="text-danger"{{end}}>{{.Object.Order.Status}}</strong></span>
+                                <h4><span>Status: <strong {{if eq .Object.Order.Status "Cancelado" }}class="text-danger"
+                                            {{end}}>{{.Object.Order.Status}}</strong></span>
                                 </h4>
                             </div>
                             {{if and .Profile.User.IsStaff (ne .Object.Order.Status "Cancelado")}}
                             <form method="post" action="/orders/order/{{.Object.Order.ID}}">
-                                <input type="hidden" name="csrf" autocomplete="off"
-                                       value="{{ .csrfToken }}"/>
+                                <input type="hidden" name="csrf" autocomplete="off" value="{{ .csrfToken }}" />
                                 <div class="form-row mt-3">
                                     <div class="col-9">
                                         <select class="form-control" id="status" name="status">
-                                            <option {{if eq .Object.Order.Status
-                                            "Em Aberto"}}selected{{end}}
-                                            value="Em Aberto">Em Aberto
+                                            <option {{if eq .Object.Order.Status "Em Aberto" }}selected{{end}}
+                                                value="Em Aberto">Em Aberto
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Processando Pagamento"}}selected{{end}}
-                                            value="Processando Pagamento">Processando Pagamento
+                                            <option {{if eq .Object.Order.Status "Processando Pagamento"
+                                                }}selected{{end}} value="Processando Pagamento">Processando Pagamento
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Pagamento Aprovado"}}selected{{end}}
-                                            value="Pagamento Aprovado">Pagamento Aprovado
+                                            <option {{if eq .Object.Order.Status "Pagamento Aprovado" }}selected{{end}}
+                                                value="Pagamento Aprovado">Pagamento Aprovado
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Preparando Pedido"}}selected{{end}}
-                                            value="Preparando Pedido">Preparando Pedido
+                                            <option {{if eq .Object.Order.Status "Preparando Pedido" }}selected{{end}}
+                                                value="Preparando Pedido">Preparando Pedido
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Aguardando Envio"}}selected{{end}}
-                                            value="Aguardando Envio">Aguardando Envio
+                                            <option {{if eq .Object.Order.Status "Aguardando Envio" }}selected{{end}}
+                                                value="Aguardando Envio">Aguardando Envio
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Enviado"}}selected{{end}}
-                                            value="Enviado">Enviado
+                                            <option {{if eq .Object.Order.Status "Enviado" }}selected{{end}}
+                                                value="Enviado">Enviado
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Entregue"}}selected{{end}}
-                                            value="Entregue">Entregue
+                                            <option {{if eq .Object.Order.Status "Entregue" }}selected{{end}}
+                                                value="Entregue">Entregue
                                             </option>
-                                            <option {{if eq .Object.Order.Status
-                                            "Cancelado"}}selected{{end}}
-                                            value="Cancelado">Cancelado
+                                            <option {{if eq .Object.Order.Status "Cancelado" }}selected{{end}}
+                                                value="Cancelado">Cancelado
                                             </option>
                                         </select>
                                     </div>
@@ -68,7 +59,7 @@
                             <div class="col-sm-4 invoice-col">
                                 De
                                 <address>
-                                    <strong>Cupcake Store</strong><br>
+                                    <strong>Cake</strong><br>
                                     {{.Object.Order.DeliveryDetail.StoreAddress}}<br>
                                     {{.Object.Order.DeliveryDetail.StoreCity}}
                                     , {{.Object.Order.DeliveryDetail.StoreState}}
@@ -106,31 +97,32 @@
                             <div class="col-12 table-responsive">
                                 <table class="table table-striped">
                                     <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Qtde</th>
-                                        <th>Produto</th>
-                                        <th>Description</th>
-                                        <th>Subtotal</th>
-                                    </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Qtde</th>
+                                            <th>Produto</th>
+                                            <th>Description</th>
+                                            <th>Subtotal</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    {{range .Object.Order.ShoppingCart.Items}}
-                                    <tr>
-                                        <td>
-                                            <div style="display: flex; justify-content: center; align-items: center;">
-                                                <img id="previewImage"
-                                                     src="{{if .Product.Image}}{{.Product.Image}}{{else}}/images/600x400.svg{{end}}"
-                                                     alt="Pré-visualização da imagem"
-                                                     style="max-width: 4vh;height: auto;max-height: 4vh;">
-                                            </div>
-                                        </td>
-                                        <td>{{.Quantity}}</td>
-                                        <td>{{.Product.Name}}</td>
-                                        <td>{{abbrev 60 .Product.Description}}</td>
-                                        <td>R$ {{mulf .Quantity .ItemPrice}}</td>
-                                    </tr>
-                                    {{end}}
+                                        {{range .Object.Order.ShoppingCart.Items}}
+                                        <tr>
+                                            <td>
+                                                <div
+                                                    style="display: flex; justify-content: center; align-items: center;">
+                                                    <img id="previewImage"
+                                                        src="{{if .Product.Image}}{{.Product.Image}}{{else}}/images/600x400.svg{{end}}"
+                                                        alt="Pré-visualização da imagem"
+                                                        style="max-width: 4vh;height: auto;max-height: 4vh;">
+                                                </div>
+                                            </td>
+                                            <td>{{.Quantity}}</td>
+                                            <td>{{.Product.Name}}</td>
+                                            <td>{{abbrev 60 .Product.Description}}</td>
+                                            <td>R$ {{mulf .Quantity .ItemPrice}}</td>
+                                        </tr>
+                                        {{end}}
                                     </tbody>
                                 </table>
                             </div>
